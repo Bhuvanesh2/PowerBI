@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: erp-backend
+  datasource:
+    # Force timezone to UTC to avoid JVM zone IDs unsupported by server image
+    url: jdbc:postgresql://localhost:5432/erp?options=-c%20TimeZone%3DUTC
+    username: erp
+    password: erp
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          time_zone: UTC
+    open-in-view: false
+  flyway:
+    enabled: true
+
+app:
+  jwt:
+    # dev-only secret; change for production
+    secret: "dev-change-me-dev-change-me-dev-change-me-dev-change-me"
+    expiresMinutes: 480
+
+logging:
+  level:
+    org.springframework.security: INFO
+
